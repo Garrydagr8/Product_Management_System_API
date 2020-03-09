@@ -6,7 +6,7 @@ A RESTFul API in NodeJs made for a general product management system along with 
 2. [Usage](#usage)  
 3. [About](#about)  
 4. [Concepts used from VAP](#concepts-used-from-vap)   
-5. [Credits](#assignment-by)  
+5. [Credits](#project-by)  
 
 # Dependencies  
 - npm install express  
