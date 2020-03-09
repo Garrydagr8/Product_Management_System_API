@@ -9,24 +9,28 @@ A RESTFul API in NodeJs made for a general product management system along with 
 5. [Credits](#project-by)  
 
 # Dependencies  
-- npm install express  
-- npm install body-parser    
-- npm install joi    
-- npm install node-fetch    
-- npm install nodemon  
-- npm install swagger  
-- npm install jsonwebtoken  
-- npm install bycrypt  
-- npm install mongoose  
-- npm install morgan  
-- npm install passport-jwt  
-- npm install passport  
-- npm install swagger-ui-express  
-- npm install babel  
-- npm install eslint  
+```
+$ npm install express  
+$ npm install body-parser    
+$ npm install joi    
+$ npm install node-fetch    
+$ npm install nodemon  
+$ npm install swagger  
+$ npm install jsonwebtoken  
+$ npm install bycrypt  
+$ npm install mongoose  
+$ npm install morgan  
+$ npm install passport-jwt  
+$ npm install passport  
+$ npm install swagger-ui-express  
+$ npm install babel  
+$ npm install eslint
+```
 [Back To Top](#index)  
 # Usage
-- npm start  
+```
+$ npm start
+```
 - open in browser https://localhost:3000/api-docs to start the Swagger documentation  
 - OR   
 - VISIT https://app.swaggerhub.com/apis-docs/Garrydagr8/Product_Management_System_API/2.0.0  
