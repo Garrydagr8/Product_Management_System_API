@@ -1,0 +1,426 @@
+{
+    "title": "Product Management API Documentation",
+    "description": "RESTful API made for a Product Management System in NodeJS using MongoDB, SwaggerUI",
+    "version": "1.0.0",
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "tags": [{
+            "name": "Products",
+            "description": "API for Products Endpoints"
+        },
+        {
+            "name": "Users",
+            "description": "API for Users Endpoints"
+        },
+        {
+            "name": "Inventories",
+            "description": "API for Inventory Endpoints"
+        }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/users/signup": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "API Endpoint for create User",
+                "description": "Create new User in database",
+                "parameters": [{
+                    "name": "user",
+                    "description": "User params to regitser new user",
+                    "in": "body",
+                    "required": "true",
+                    "schema": {
+                        "$ref": "#definitions/User"
+                    }
+                }],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "New user has been Created",
+                        "schema": {
+                            "$ref": "#definitions/SignupRsp"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "API Endpoint to login his/her account",
+                "description": "Login user",
+                "parameters": [{
+                    "name": "user",
+                    "description": "User params to login",
+                    "in": "body",
+                    "required": "true",
+                    "schema": {
+                        "$ref": "#definitions/UserLogin"
+                    }
+                }],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "New user has loggedIn",
+                        "schema": {
+                            "$ref": "#definitions/UserLoginRsp"
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "post": {
+                "tags": ["Products"],
+                "summary": "API Endpoint for create Product",
+                "description": "Create new Product in database",
+                "parameters": [{
+                        "name": "product",
+                        "description": "Product params to create new product",
+                        "in": "body",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#definitions/Product"
+                        }
+                    },
+                    {
+                        "name": "authorization",
+                        "description": "Access token to authorize the user",
+                        "in": "header",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "New Product Created",
+                        "schema": {
+                            "$ref": "#definitions/Product"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Products"],
+                "summary": "API Endpoint to find all Products",
+                "description": "Find all Products from the database",
+                "parameters": [{
+                        "name": "page",
+                        "type": "integer",
+                        "description": "Define the page index for the records",
+                        "in": "query"
+                    },
+                    {
+                        "name": "perPage",
+                        "type": "integer",
+                        "description": "Define the limiet for the records i.e 10",
+                        "in": "query"
+                    },
+                    {
+                        "name": "authorization",
+                        "description": "Access token to authorize the user",
+                        "in": "header",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "All the Products",
+                        "schema": {
+                            "$ref": "#definitions/Products"
+                        }
+                    }
+                }
+            }
+        },
+        "/products/{id}": {
+            "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": "true",
+                    "description": "id of the product",
+                    "type": "string"
+
+                },
+                {
+                    "name": "authorization",
+                    "description": "Access token to authorize the user",
+                    "in": "header",
+                    "type": "string",
+                    "required": true
+                }
+            ],
+            "get": {
+                "tags": ["Products"],
+                "summary": "API Endpoint to find single Product",
+                "description": "Find one from the database",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Product has been found",
+                        "schema": {
+                            "$ref": "#definitions/Product"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Products"],
+                "summary": "API Endpoint to delete the Product",
+                "description": "Delete product from the database",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Product has deleted",
+                        "schema": {
+                            "$ref": "#definitions/Product"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Products"],
+                "summary": "API Endpoint for update Product",
+                "description": "Update the existing Product in database",
+                "parameters": [{
+                    "name": "product",
+                    "description": "Product params to update the product",
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#definitions/UpdateProduct"
+                    }
+                }],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Product has been Updated",
+                        "schema": {
+                            "$ref": "#definitions/Product"
+                        }
+                    }
+                }
+            }
+        },
+        "/inventory": {
+            "post": {
+                "tags": ["Inventories"],
+                "summary": "Create a new Inventory",
+                "description": "Add new products in the Inventory",
+                "parameters": [{
+                        "name": "inventory",
+                        "description": "Products that user want to add in the Inventory",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#definitions/Inventory"
+                        }
+                    },
+                    {
+                        "name": "authorization",
+                        "description": "Access token to authorize the user",
+                        "in": "header",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "new Inventory is created",
+                        "schema": {
+                            "$ref": "#definitions/Inventory"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Inventories"],
+                "summary": "Find all the Inventories with products",
+                "description": "View all the Products in the Inventory",
+                "parameters": [{
+                    "name": "authorization",
+                    "description": "Access token to authorize the user",
+                    "in": "header",
+                    "type": "string",
+                    "required": true
+                }],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "View all the Inventories",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#definitions/Inventories"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "SignupRsp": {
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "User": {
+            "required": ["firstName", "lastName", "email", "password"],
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "integer"
+                }
+            }
+        },
+        "UserLogin": {
+            "required": ["email", "password"],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserLoginRsp": {
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "Product": {
+            "required": ["title", "price", "quantity"],
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer",
+                    "format": "Int32"
+
+                },
+                "quantity": {
+                    "type": "integer",
+                    "format": "Int32"
+                }
+            }
+        },
+        "UpdateProduct": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer",
+                    "format": "Int32"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "format": "Int32"
+                }
+            }
+        },
+        "Products": {
+            "properties": {
+                "docs": {
+                    "type": "array",
+                    "$ref": "#definitions/Product"
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "pages": {
+                    "type": "integer"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Inventory": {
+            "required": ["name"],
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "InventoryCustomRsp": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/Product"
+                    }
+                },
+                "user": {
+                    "$ref": "#definitions/UserCustomRsp"
+                }
+            }
+        },
+        "UserCustomRsp": {
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                }
+            }
+        },
+        "Inventories": {
+            "type": "array",
+            "items": {
+                "$ref": "#definitions/InventoryCustomRsp"
+            }
+        }
+    }
+}
